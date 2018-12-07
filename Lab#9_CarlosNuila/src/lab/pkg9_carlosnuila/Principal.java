@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,6 +22,16 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        AutoBus nuevoBus = new AutoBus(110, 110);
+        Parada parada1 = new Parada("Las Uvas", 130, 120);
+        Parada parada2 = new Parada("Tiloarque", 170, 80);
+        Parada parada3 = new Parada("Tatumbla", 300, 240);
+        Estudiante estudiante1 = new Estudiante("Ana", parada1);
+        Estudiante estudiante2 = new Estudiante("Carlos", parada2);
+        Estudiante estudiante3 = new Estudiante("Daniel", parada3);
+        nuevoBus.getPasajeros().add(estudiante1);
+        nuevoBus.getPasajeros().add(estudiante2);
+        nuevoBus.getPasajeros().add(estudiante3);
     }
 
     /**
@@ -75,11 +86,11 @@ public class Principal extends javax.swing.JFrame {
         jb_actBuses = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jl_listaBusesSimu = new javax.swing.JList<>();
-        jButton1 = new javax.swing.JButton();
+        jb_iniciarSimulacion = new javax.swing.JButton();
         jpb_simulacion = new javax.swing.JProgressBar();
         jl_estacion = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jt_registro = new javax.swing.JTable();
 
         jLabel1.setText("Nombre:");
 
@@ -355,7 +366,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jb_agregarBus.setText("Agregar a AutoBus");
+        jb_agregarBus.setText("Subirse a AutoBus");
         jb_agregarBus.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jb_agregarBusMouseClicked(evt);
@@ -372,14 +383,19 @@ public class Principal extends javax.swing.JFrame {
         jl_listaBusesSimu.setModel(new DefaultListModel());
         jScrollPane2.setViewportView(jl_listaBusesSimu);
 
-        jButton1.setText("Iniciar Simulación");
+        jb_iniciarSimulacion.setText("Iniciar Simulación");
+        jb_iniciarSimulacion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_iniciarSimulacionMouseClicked(evt);
+            }
+        });
 
         jpb_simulacion.setString(Integer.toString(jpb_simulacion.getValue())+" Minutos");
         jpb_simulacion.setStringPainted(true);
 
         jl_estacion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jt_registro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -387,7 +403,7 @@ public class Principal extends javax.swing.JFrame {
                 "Parada", "Tiempo", "Estudiantes"
             }
         ));
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(jt_registro);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -405,14 +421,14 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(140, 140, 140))
+                        .addComponent(jpb_simulacion, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jl_estacion, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(99, 99, 99))
+                        .addGap(116, 116, 116))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jpb_simulacion, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53))
+                        .addComponent(jb_iniciarSimulacion)
+                        .addGap(159, 159, 159))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36))))
@@ -420,34 +436,31 @@ public class Principal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jb_crearParada)
-                    .addComponent(jButton1))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jb_iniciarSimulacion)
+                        .addGap(18, 18, 18)
+                        .addComponent(jl_estacion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jpb_simulacion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jb_crearParada)
                         .addGap(18, 18, 18)
                         .addComponent(jb_crearBus)
                         .addGap(18, 18, 18)
                         .addComponent(jb_crearEstudiante)
-                        .addGap(26, 26, 26)
-                        .addComponent(jb_agregarBus))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jl_estacion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jpb_simulacion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jb_agregarBus)))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addComponent(jb_actBuses)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -487,7 +500,7 @@ public class Principal extends javax.swing.JFrame {
             double velocidad = Double.parseDouble(jt_velocidad.getText());
             AutoBus nuevoBus = new AutoBus(numeroIdentificacion, placa, color, velocidad);
             listaBuses.add(nuevoBus);
-            JOptionPane.showMessageDialog(jd_crearParada, "Se ha creado un autobus");
+            JOptionPane.showMessageDialog(jd_crearBus, "Se ha creado un autobus");
             jt_numeroIdentificacion.setText("");
             jt_placa.setText("");
             jt_color.setText("");
@@ -513,6 +526,7 @@ public class Principal extends javax.swing.JFrame {
             int numeroCuenta = Integer.parseInt(jt_numeroCuenta.getText());
             Parada parada = (Parada) cb_parada.getSelectedItem();
             Estudiante nuevoEstudiante = new Estudiante(nombre, edad, numeroCuenta, parada);
+            JOptionPane.showMessageDialog(jd_crearEstudiante, "Estudiante Creado");
             listaEstudiantes.add(nuevoEstudiante);
             jt_nombreEstudiante.setText("");
             js_edad.setValue(15);
@@ -553,24 +567,91 @@ public class Principal extends javax.swing.JFrame {
         jd_agregaraAutoBus.setLocationRelativeTo(this);
         DefaultComboBoxModel modelo = new DefaultComboBoxModel(listaBuses.toArray());
         cb_buses.setModel(modelo);
-        
+
         DefaultListModel modeloLista = (DefaultListModel) lista_estudiante.getModel();
         for (Estudiante temp : listaEstudiantes) {
             modeloLista.addElement(temp);
         }
         lista_estudiante.setModel(modelo);
-        
+
         jd_agregaraAutoBus.setVisible(true);
     }//GEN-LAST:event_jb_agregarBusMouseClicked
 
     private void jb_actBusesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_actBusesMouseClicked
         // TODO add your handling code here:
-       DefaultListModel modeloLista = (DefaultListModel) jl_listaBusesSimu.getModel();
+        DefaultListModel modeloLista = (DefaultListModel) jl_listaBusesSimu.getModel();
         for (AutoBus temp : listaBuses) {
             modeloLista.addElement(temp);
         }
         jl_listaBusesSimu.setModel(modeloLista);
     }//GEN-LAST:event_jb_actBusesMouseClicked
+
+    private void jb_iniciarSimulacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_iniciarSimulacionMouseClicked
+        // TODO add your handling code here:
+        jt_registro.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Parada", "Tiempo", "Estudiantes"
+            }
+        ));
+        if (jl_listaBusesSimu.getSelectedIndex() >= 0) {
+            AutoBus busSeleccionado = listaBuses.get(jl_listaBusesSimu.getSelectedIndex());
+            Parada estacionActual = null;
+            ArrayList<Parada> paradasRealizar = new ArrayList();
+            for (Estudiante temp : busSeleccionado.getPasajeros()) {
+                paradasRealizar.add(temp.getParada());
+            }
+            double distanciaMenor = 1000000;
+            for (int i = 0; i < paradasRealizar.size(); i++) {
+                if (paradasRealizar.get(i).getDistancia() < distanciaMenor) {
+                    distanciaMenor = paradasRealizar.get(i).getDistancia();
+                    estacionActual = paradasRealizar.get(i);
+                }
+            }
+            int tiempo = (int) Math.ceil((estacionActual.getDistancia() / busSeleccionado.getVelocidad()) * 60);
+            AdministrarBus ab = new AdministrarBus(estacionActual.getNombre(), tiempo, jpb_simulacion, jl_estacion);
+            ArrayList<Estudiante> estudiantesBajan = new ArrayList();
+            for (Estudiante temp : busSeleccionado.getPasajeros()) {
+                if (temp.getParada().getNombre().equals(estacionActual.getNombre())) {
+                    estudiantesBajan.add(temp);
+                    busSeleccionado.getPasajeros().remove(temp);
+                }
+            }
+            DefaultTableModel modeloTabla = (DefaultTableModel) jt_registro.getModel();
+            Object[] row = {estacionActual, tiempo, estudiantesBajan};
+            modeloTabla.addRow(row);
+            jt_registro.setModel(modeloTabla);
+            Parada temp = estacionActual;
+            while (busSeleccionado.getPasajeros().size() > 0) {
+                double nuevaDistanciamenor = 1000000;
+                for (int i = 0; i < paradasRealizar.size(); i++) {
+                    double coorX1 = estacionActual.getCoorX();
+                    double coorY1 = estacionActual.getCoorY();
+                    double coorX2 = paradasRealizar.get(i).getCoorX();
+                    double coorY2 = paradasRealizar.get(i).getCoorY();
+                    double distanciaComparar = Math.pow(coorX2 - coorX1, 2) + Math.pow(coorY2 - coorY1, 2);
+                    distanciaComparar = Math.sqrt(distanciaComparar);
+                    if (distanciaComparar < nuevaDistanciamenor) {
+                        nuevaDistanciamenor = distanciaComparar;
+                        temp = paradasRealizar.get(i);
+                    }
+                    estacionActual = temp;
+
+                }
+                tiempo = (int) Math.ceil((estacionActual.getDistancia() / busSeleccionado.getVelocidad()) * 60);
+                AdministrarBus ab2 = new AdministrarBus(estacionActual.getNombre(), tiempo, jpb_simulacion, jl_estacion);
+                for (Estudiante temporal : busSeleccionado.getPasajeros()) {
+                    if (temporal.getParada().getNombre().equals(estacionActual.getNombre())) {
+                        busSeleccionado.getPasajeros().remove(temporal);
+                    }
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un bus de la Lista");
+        }
+    }//GEN-LAST:event_jb_iniciarSimulacionMouseClicked
 
     /**
      * @param args the command line arguments
@@ -583,7 +664,7 @@ public class Principal extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -613,7 +694,6 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cb_buses;
     private javax.swing.JComboBox<String> cb_parada;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -631,7 +711,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jb_CrearBUS;
     private javax.swing.JButton jb_CrearESTUdiante;
     private javax.swing.JButton jb_CrearPARada;
@@ -641,6 +720,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jb_crearBus;
     private javax.swing.JButton jb_crearEstudiante;
     private javax.swing.JButton jb_crearParada;
+    private javax.swing.JButton jb_iniciarSimulacion;
     private javax.swing.JDialog jd_agregaraAutoBus;
     private javax.swing.JDialog jd_crearBus;
     private javax.swing.JDialog jd_crearEstudiante;
@@ -657,6 +737,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField jt_numeroCuenta;
     private javax.swing.JTextField jt_numeroIdentificacion;
     private javax.swing.JTextField jt_placa;
+    private javax.swing.JTable jt_registro;
     private javax.swing.JTextField jt_velocidad;
     private javax.swing.JList<String> lista_estudiante;
     // End of variables declaration//GEN-END:variables
