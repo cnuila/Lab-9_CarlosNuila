@@ -72,6 +72,14 @@ public class Principal extends javax.swing.JFrame {
         jb_crearBus = new javax.swing.JButton();
         jb_crearEstudiante = new javax.swing.JButton();
         jb_agregarBus = new javax.swing.JButton();
+        jb_actBuses = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jl_listaBusesSimu = new javax.swing.JList<>();
+        jButton1 = new javax.swing.JButton();
+        jpb_simulacion = new javax.swing.JProgressBar();
+        jl_estacion = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         jLabel1.setText("Nombre:");
 
@@ -354,31 +362,92 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jb_actBuses.setText("Actualizar Lista Buses");
+        jb_actBuses.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_actBusesMouseClicked(evt);
+            }
+        });
+
+        jl_listaBusesSimu.setModel(new DefaultListModel());
+        jScrollPane2.setViewportView(jl_listaBusesSimu);
+
+        jButton1.setText("Iniciar Simulación");
+
+        jpb_simulacion.setString(Integer.toString(jpb_simulacion.getValue())+" Minutos");
+        jpb_simulacion.setStringPainted(true);
+
+        jl_estacion.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Parada", "Tiempo", "Estudiantes"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jb_agregarBus)
                     .addComponent(jb_crearEstudiante)
                     .addComponent(jb_crearBus)
-                    .addComponent(jb_crearParada))
-                .addContainerGap(412, Short.MAX_VALUE))
+                    .addComponent(jb_crearParada)
+                    .addComponent(jb_actBuses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(140, 140, 140))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jl_estacion, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(99, 99, 99))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jpb_simulacion, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jb_crearParada)
-                .addGap(18, 18, 18)
-                .addComponent(jb_crearBus)
-                .addGap(18, 18, 18)
-                .addComponent(jb_crearEstudiante)
-                .addGap(18, 18, 18)
-                .addComponent(jb_agregarBus)
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jb_crearParada)
+                    .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jb_crearBus)
+                        .addGap(18, 18, 18)
+                        .addComponent(jb_crearEstudiante)
+                        .addGap(26, 26, 26)
+                        .addComponent(jb_agregarBus))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jl_estacion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jpb_simulacion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jb_actBuses)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -494,6 +563,15 @@ public class Principal extends javax.swing.JFrame {
         jd_agregaraAutoBus.setVisible(true);
     }//GEN-LAST:event_jb_agregarBusMouseClicked
 
+    private void jb_actBusesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_actBusesMouseClicked
+        // TODO add your handling code here:
+       DefaultListModel modeloLista = (DefaultListModel) jl_listaBusesSimu.getModel();
+        for (AutoBus temp : listaBuses) {
+            modeloLista.addElement(temp);
+        }
+        jl_listaBusesSimu.setModel(modeloLista);
+    }//GEN-LAST:event_jb_actBusesMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -535,6 +613,7 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cb_buses;
     private javax.swing.JComboBox<String> cb_parada;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -550,9 +629,13 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
     private javax.swing.JButton jb_CrearBUS;
     private javax.swing.JButton jb_CrearESTUdiante;
     private javax.swing.JButton jb_CrearPARada;
+    private javax.swing.JButton jb_actBuses;
     private javax.swing.JButton jb_agregarAbus;
     private javax.swing.JButton jb_agregarBus;
     private javax.swing.JButton jb_crearBus;
@@ -562,6 +645,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JDialog jd_crearBus;
     private javax.swing.JDialog jd_crearEstudiante;
     private javax.swing.JDialog jd_crearParada;
+    private javax.swing.JLabel jl_estacion;
+    private javax.swing.JList<String> jl_listaBusesSimu;
+    private javax.swing.JProgressBar jpb_simulacion;
     private javax.swing.JSpinner js_edad;
     private javax.swing.JTextField jt_angulo;
     private javax.swing.JTextField jt_color;
