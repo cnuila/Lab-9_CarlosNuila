@@ -23,12 +23,19 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
         initComponents();
         AutoBus nuevoBus = new AutoBus(110, 110);
-        Parada parada1 = new Parada("Las Uvas", 130, 120);
+        listaBuses.add(nuevoBus);
+        Parada parada1 = new Parada("Las Uvas", 10, 120);
+        listaParadas.add(parada1);
         Parada parada2 = new Parada("Tiloarque", 170, 80);
+        listaParadas.add(parada2);
         Parada parada3 = new Parada("Tatumbla", 300, 240);
+        listaParadas.add(parada3);
         Estudiante estudiante1 = new Estudiante("Ana", parada1);
+        listaEstudiantes.add(estudiante1);
         Estudiante estudiante2 = new Estudiante("Carlos", parada2);
+        listaEstudiantes.add(estudiante2);
         Estudiante estudiante3 = new Estudiante("Daniel", parada3);
+        listaEstudiantes.add(estudiante3);
         nuevoBus.getPasajeros().add(estudiante1);
         nuevoBus.getPasajeros().add(estudiante2);
         nuevoBus.getPasajeros().add(estudiante3);
@@ -572,14 +579,14 @@ public class Principal extends javax.swing.JFrame {
         for (Estudiante temp : listaEstudiantes) {
             modeloLista.addElement(temp);
         }
-        lista_estudiante.setModel(modelo);
+        lista_estudiante.setModel(modeloLista);
 
         jd_agregaraAutoBus.setVisible(true);
     }//GEN-LAST:event_jb_agregarBusMouseClicked
 
     private void jb_actBusesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_actBusesMouseClicked
         // TODO add your handling code here:
-        DefaultListModel modeloLista = (DefaultListModel) jl_listaBusesSimu.getModel();
+        DefaultListModel modeloLista = new DefaultListModel();
         for (AutoBus temp : listaBuses) {
             modeloLista.addElement(temp);
         }
@@ -611,43 +618,11 @@ public class Principal extends javax.swing.JFrame {
                 }
             }
             int tiempo = (int) Math.ceil((estacionActual.getDistancia() / busSeleccionado.getVelocidad()) * 60);
-            AdministrarBus ab = new AdministrarBus(estacionActual.getNombre(), tiempo, jpb_simulacion, jl_estacion);
-            ArrayList<Estudiante> estudiantesBajan = new ArrayList();
-            for (Estudiante temp : busSeleccionado.getPasajeros()) {
-                if (temp.getParada().getNombre().equals(estacionActual.getNombre())) {
-                    estudiantesBajan.add(temp);
-                    busSeleccionado.getPasajeros().remove(temp);
-                }
-            }
-            DefaultTableModel modeloTabla = (DefaultTableModel) jt_registro.getModel();
-            Object[] row = {estacionActual, tiempo, estudiantesBajan};
-            modeloTabla.addRow(row);
-            jt_registro.setModel(modeloTabla);
-            Parada temp = estacionActual;
-            while (busSeleccionado.getPasajeros().size() > 0) {
-                double nuevaDistanciamenor = 1000000;
-                for (int i = 0; i < paradasRealizar.size(); i++) {
-                    double coorX1 = estacionActual.getCoorX();
-                    double coorY1 = estacionActual.getCoorY();
-                    double coorX2 = paradasRealizar.get(i).getCoorX();
-                    double coorY2 = paradasRealizar.get(i).getCoorY();
-                    double distanciaComparar = Math.pow(coorX2 - coorX1, 2) + Math.pow(coorY2 - coorY1, 2);
-                    distanciaComparar = Math.sqrt(distanciaComparar);
-                    if (distanciaComparar < nuevaDistanciamenor) {
-                        nuevaDistanciamenor = distanciaComparar;
-                        temp = paradasRealizar.get(i);
-                    }
-                    estacionActual = temp;
-
-                }
-                tiempo = (int) Math.ceil((estacionActual.getDistancia() / busSeleccionado.getVelocidad()) * 60);
-                AdministrarBus ab2 = new AdministrarBus(estacionActual.getNombre(), tiempo, jpb_simulacion, jl_estacion);
-                for (Estudiante temporal : busSeleccionado.getPasajeros()) {
-                    if (temporal.getParada().getNombre().equals(estacionActual.getNombre())) {
-                        busSeleccionado.getPasajeros().remove(temporal);
-                    }
-                }
-            }
+            AdministrarBus ab = new AdministrarBus(estacionActual.getNombre(), tiempo, jpb_simulacion, jl_estacion,estacionActual, jt_registro, paradasRealizar,busSeleccionado);
+            ab.start();
+            
+            
+            
         } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un bus de la Lista");
         }
