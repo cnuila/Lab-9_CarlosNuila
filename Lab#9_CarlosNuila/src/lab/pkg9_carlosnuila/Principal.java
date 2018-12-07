@@ -6,6 +6,8 @@
 package lab.pkg9_carlosnuila;
 
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -55,11 +57,21 @@ public class Principal extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cb_parada = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
+        jt_nombreEstudiante = new javax.swing.JTextField();
+        jt_numeroCuenta = new javax.swing.JTextField();
+        jb_CrearESTUdiante = new javax.swing.JButton();
+        js_edad = new javax.swing.JSpinner();
+        jd_agregaraAutoBus = new javax.swing.JDialog();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lista_estudiante = new javax.swing.JList<>();
+        cb_buses = new javax.swing.JComboBox<>();
+        jb_agregarAbus = new javax.swing.JButton();
         jb_crearParada = new javax.swing.JButton();
         jb_crearBus = new javax.swing.JButton();
         jb_crearEstudiante = new javax.swing.JButton();
+        jb_agregarBus = new javax.swing.JButton();
 
         jLabel1.setText("Nombre:");
 
@@ -201,55 +213,115 @@ public class Principal extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel10.setText("Crear Estudiante");
 
-        jLabel11.setText("jLabel11");
+        jLabel11.setText("Nombre:");
 
-        jLabel12.setText("jLabel12");
+        jLabel12.setText("Edad:");
 
-        jLabel13.setText("jLabel13");
+        jLabel13.setText("Número de Cuenta:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel14.setText("Parada:");
 
-        jLabel14.setText("jLabel14");
+        jb_CrearESTUdiante.setText("Crear");
+        jb_CrearESTUdiante.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_CrearESTUdianteMouseClicked(evt);
+            }
+        });
+
+        js_edad.setModel(new javax.swing.SpinnerNumberModel(15, 15, null, 1));
 
         javax.swing.GroupLayout jd_crearEstudianteLayout = new javax.swing.GroupLayout(jd_crearEstudiante.getContentPane());
         jd_crearEstudiante.getContentPane().setLayout(jd_crearEstudianteLayout);
         jd_crearEstudianteLayout.setHorizontalGroup(
             jd_crearEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_crearEstudianteLayout.createSequentialGroup()
-                .addContainerGap(106, Short.MAX_VALUE)
-                .addComponent(jLabel10)
-                .addGap(96, 96, 96))
             .addGroup(jd_crearEstudianteLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jd_crearEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jd_crearEstudianteLayout.createSequentialGroup()
-                        .addGap(80, 80, 80)
                         .addGroup(jd_crearEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel13)
                             .addComponent(jLabel12)
-                            .addComponent(jLabel11)))
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel14))
+                        .addGap(18, 18, 18)
+                        .addGroup(jd_crearEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cb_parada, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jt_nombreEstudiante)
+                            .addComponent(jt_numeroCuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+                            .addComponent(js_edad, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jd_crearEstudianteLayout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(53, 53, 53)
+                        .addComponent(jLabel10)))
+                .addContainerGap(64, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_crearEstudianteLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jb_CrearESTUdiante)
+                .addGap(130, 130, 130))
         );
         jd_crearEstudianteLayout.setVerticalGroup(
             jd_crearEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jd_crearEstudianteLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel10)
-                .addGap(78, 78, 78)
-                .addComponent(jLabel11)
+                .addGap(34, 34, 34)
+                .addGroup(jd_crearEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel11)
+                    .addComponent(jt_nombreEstudiante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel13)
+                .addGroup(jd_crearEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(js_edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jd_crearEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
-                .addContainerGap(71, Short.MAX_VALUE))
+                    .addComponent(jLabel13)
+                    .addComponent(jt_numeroCuenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jd_crearEstudianteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14)
+                    .addComponent(cb_parada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jb_CrearESTUdiante)
+                .addGap(25, 25, 25))
+        );
+
+        lista_estudiante.setModel(new DefaultListModel());
+        jScrollPane1.setViewportView(lista_estudiante);
+
+        jb_agregarAbus.setText("Agregar");
+        jb_agregarAbus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_agregarAbusMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jd_agregaraAutoBusLayout = new javax.swing.GroupLayout(jd_agregaraAutoBus.getContentPane());
+        jd_agregaraAutoBus.getContentPane().setLayout(jd_agregaraAutoBusLayout);
+        jd_agregaraAutoBusLayout.setHorizontalGroup(
+            jd_agregaraAutoBusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_agregaraAutoBusLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jd_agregaraAutoBusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_agregaraAutoBusLayout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(cb_buses, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(62, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jd_agregaraAutoBusLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jb_agregarAbus)
+                        .addGap(112, 112, 112))))
+        );
+        jd_agregaraAutoBusLayout.setVerticalGroup(
+            jd_agregaraAutoBusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_agregaraAutoBusLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(jd_agregaraAutoBusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jd_agregaraAutoBusLayout.createSequentialGroup()
+                        .addComponent(cb_buses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(84, 84, 84)
+                        .addComponent(jb_agregarAbus))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -269,6 +341,18 @@ public class Principal extends javax.swing.JFrame {
         });
 
         jb_crearEstudiante.setText("Crear Estudiante");
+        jb_crearEstudiante.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_crearEstudianteMouseClicked(evt);
+            }
+        });
+
+        jb_agregarBus.setText("Agregar a AutoBus");
+        jb_agregarBus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_agregarBusMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -277,10 +361,11 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jb_agregarBus)
                     .addComponent(jb_crearEstudiante)
                     .addComponent(jb_crearBus)
                     .addComponent(jb_crearParada))
-                .addContainerGap(422, Short.MAX_VALUE))
+                .addContainerGap(412, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,7 +376,9 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jb_crearBus)
                 .addGap(18, 18, 18)
                 .addComponent(jb_crearEstudiante)
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jb_agregarBus)
+                .addContainerGap(212, Short.MAX_VALUE))
         );
 
         pack();
@@ -349,6 +436,64 @@ public class Principal extends javax.swing.JFrame {
         jd_crearBus.setVisible(true);
     }//GEN-LAST:event_jb_crearBusMouseClicked
 
+    private void jb_CrearESTUdianteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_CrearESTUdianteMouseClicked
+        // TODO add your handling code here:
+        try {
+            String nombre = jt_nombreEstudiante.getText();
+            int edad = (int) js_edad.getValue();
+            int numeroCuenta = Integer.parseInt(jt_numeroCuenta.getText());
+            Parada parada = (Parada) cb_parada.getSelectedItem();
+            Estudiante nuevoEstudiante = new Estudiante(nombre, edad, numeroCuenta, parada);
+            listaEstudiantes.add(nuevoEstudiante);
+            jt_nombreEstudiante.setText("");
+            js_edad.setValue(15);
+            jt_numeroCuenta.setText("");
+            cb_parada.setSelectedIndex(0);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(jd_crearEstudiante, "Error Fatal");
+        }
+    }//GEN-LAST:event_jb_CrearESTUdianteMouseClicked
+
+    private void jb_crearEstudianteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_crearEstudianteMouseClicked
+        // TODO add your handling code here:
+        jd_crearEstudiante.pack();
+        jd_crearEstudiante.setModal(true);
+        jd_crearEstudiante.setLocationRelativeTo(this);
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel(listaParadas.toArray());
+        cb_parada.setModel(modelo);
+
+        jd_crearEstudiante.setVisible(true);
+    }//GEN-LAST:event_jb_crearEstudianteMouseClicked
+
+    private void jb_agregarAbusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_agregarAbusMouseClicked
+        // TODO add your handling code here:
+        if (lista_estudiante.getSelectedIndex() >= 0) {
+            AutoBus busSeleccionado = (AutoBus) cb_buses.getSelectedItem();
+            Estudiante estudSeleccionado = listaEstudiantes.get(lista_estudiante.getSelectedIndex());
+            busSeleccionado.getPasajeros().add(estudSeleccionado);
+            JOptionPane.showMessageDialog(jd_agregaraAutoBus, "Pasajero Agregado");
+        } else {
+            JOptionPane.showMessageDialog(jd_crearBus, "Debe seleccionar a un estudiante de la Lista");
+        }
+    }//GEN-LAST:event_jb_agregarAbusMouseClicked
+
+    private void jb_agregarBusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_agregarBusMouseClicked
+        // TODO add your handling code here:
+        jd_agregaraAutoBus.pack();
+        jd_agregaraAutoBus.setModal(true);
+        jd_agregaraAutoBus.setLocationRelativeTo(this);
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel(listaBuses.toArray());
+        cb_buses.setModel(modelo);
+        
+        DefaultListModel modeloLista = (DefaultListModel) lista_estudiante.getModel();
+        for (Estudiante temp : listaEstudiantes) {
+            modeloLista.addElement(temp);
+        }
+        lista_estudiante.setModel(modelo);
+        
+        jd_agregaraAutoBus.setVisible(true);
+    }//GEN-LAST:event_jb_agregarBusMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -386,8 +531,10 @@ public class Principal extends javax.swing.JFrame {
 
     ArrayList<Parada> listaParadas = new ArrayList();
     ArrayList<AutoBus> listaBuses = new ArrayList();
+    ArrayList<Estudiante> listaEstudiantes = new ArrayList();
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cb_buses;
+    private javax.swing.JComboBox<String> cb_parada;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -402,20 +549,29 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jb_CrearBUS;
+    private javax.swing.JButton jb_CrearESTUdiante;
     private javax.swing.JButton jb_CrearPARada;
+    private javax.swing.JButton jb_agregarAbus;
+    private javax.swing.JButton jb_agregarBus;
     private javax.swing.JButton jb_crearBus;
     private javax.swing.JButton jb_crearEstudiante;
     private javax.swing.JButton jb_crearParada;
+    private javax.swing.JDialog jd_agregaraAutoBus;
     private javax.swing.JDialog jd_crearBus;
     private javax.swing.JDialog jd_crearEstudiante;
     private javax.swing.JDialog jd_crearParada;
+    private javax.swing.JSpinner js_edad;
     private javax.swing.JTextField jt_angulo;
     private javax.swing.JTextField jt_color;
     private javax.swing.JTextField jt_distancia;
+    private javax.swing.JTextField jt_nombreEstudiante;
     private javax.swing.JTextField jt_nombreParada;
+    private javax.swing.JTextField jt_numeroCuenta;
     private javax.swing.JTextField jt_numeroIdentificacion;
     private javax.swing.JTextField jt_placa;
     private javax.swing.JTextField jt_velocidad;
+    private javax.swing.JList<String> lista_estudiante;
     // End of variables declaration//GEN-END:variables
 }
