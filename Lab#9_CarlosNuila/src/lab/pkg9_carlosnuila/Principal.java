@@ -606,6 +606,7 @@ public class Principal extends javax.swing.JFrame {
             if (busSeleccionado.getPasajeros().size() > 0) {
                 Parada estacionActual = null;
                 ArrayList<Parada> paradasRealizar = new ArrayList();
+                ArrayList<Parada> paradasRealizar2 = new ArrayList();
                 for (Estudiante temp : busSeleccionado.getPasajeros()) {
                     paradasRealizar.add(temp.getParada());
                 }
@@ -616,6 +617,23 @@ public class Principal extends javax.swing.JFrame {
                         estacionActual = paradasRealizar.get(i);
                     }
                 }
+                paradasRealizar2.add(estacionActual);
+                paradasRealizar.remove(estacionActual);
+                /*while(paradasRealizar.size() > 0){
+                    for (int i = 0; i < paradasRealizar.size(); i++) {
+                        double coorX1 = parada.getCoorX();
+                        double coorY1 = parada.getCoorY();
+                        double coorX2 = paradasRealizar.get(i).getCoorX();
+                        double coorY2 = paradasRealizar.get(i).getCoorY();
+                        double distanciaComparar = Math.pow(coorX2 - coorX1, 2) + Math.pow(coorY2 - coorY1, 2);
+                        distanciaComparar = Math.sqrt(distanciaComparar);
+                        if (distanciaComparar < nuevaDistanciamenor) {
+                            nuevaDistanciamenor = distanciaComparar;
+                            temp = paradasRealizar.get(i);
+                        }
+                        parada = temp;
+                    }
+                }*/
                 int tiempo = (int) Math.ceil((estacionActual.getDistancia() / busSeleccionado.getVelocidad()) * 60);
                 AdministrarBus ab = new AdministrarBus(estacionActual.getNombre(), tiempo, jpb_simulacion, jl_estacion, estacionActual, jt_registro, paradasRealizar, busSeleccionado);
                 ab.start();

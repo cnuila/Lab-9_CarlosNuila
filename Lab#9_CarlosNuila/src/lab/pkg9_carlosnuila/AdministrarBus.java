@@ -85,7 +85,6 @@ public class AdministrarBus extends Thread {
                             nuevaDistanciamenor = distanciaComparar;
                             temp = paradasRealizar.get(i);
                         }
-                        //paradasRealizar.remove(parada);
                         parada = temp;
                     }
                     
