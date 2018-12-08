@@ -22,6 +22,8 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         initComponents();
+        //POR SI NO QUERES CREARLOS
+        /*
         AutoBus nuevoBus = new AutoBus(110, 110);
         listaBuses.add(nuevoBus);
         Parada parada1 = new Parada("Las Uvas", 8, 80);
@@ -38,7 +40,7 @@ public class Principal extends javax.swing.JFrame {
         listaEstudiantes.add(estudiante3);
         nuevoBus.getPasajeros().add(estudiante1);
         nuevoBus.getPasajeros().add(estudiante2);
-        nuevoBus.getPasajeros().add(estudiante3);
+        nuevoBus.getPasajeros().add(estudiante3);*/
     }
 
     /**
