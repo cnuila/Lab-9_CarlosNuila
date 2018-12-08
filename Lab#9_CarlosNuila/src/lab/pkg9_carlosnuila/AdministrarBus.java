@@ -76,9 +76,12 @@ public class AdministrarBus extends Thread {
 
                     AdministrarBus ab2 = new AdministrarBus(parada.getNombre(), tiempoNuevo, progBar, label, parada, tabla, paradasRealizar, busSeleccionado);
                     ab2.start();
-
                 }
             }
+            if (!vive) {
+                label.setText("UNITEC");
+            }
+
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
