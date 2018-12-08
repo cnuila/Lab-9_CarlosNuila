@@ -24,11 +24,11 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         AutoBus nuevoBus = new AutoBus(110, 110);
         listaBuses.add(nuevoBus);
-        Parada parada1 = new Parada("Las Uvas", 10, 120);
+        Parada parada1 = new Parada("Las Uvas", 7, 120);
         listaParadas.add(parada1);
-        Parada parada2 = new Parada("Tiloarque", 170, 80);
+        Parada parada2 = new Parada("Tiloarque", 5, 80);
         listaParadas.add(parada2);
-        Parada parada3 = new Parada("Tatumbla", 300, 240);
+        Parada parada3 = new Parada("Tatumbla", 10, 240);
         listaParadas.add(parada3);
         Estudiante estudiante1 = new Estudiante("Ana", parada1);
         listaEstudiantes.add(estudiante1);
@@ -575,7 +575,7 @@ public class Principal extends javax.swing.JFrame {
         DefaultComboBoxModel modelo = new DefaultComboBoxModel(listaBuses.toArray());
         cb_buses.setModel(modelo);
 
-        DefaultListModel modeloLista = (DefaultListModel) lista_estudiante.getModel();
+        DefaultListModel modeloLista = new DefaultListModel();
         for (Estudiante temp : listaEstudiantes) {
             modeloLista.addElement(temp);
         }
@@ -596,33 +596,32 @@ public class Principal extends javax.swing.JFrame {
     private void jb_iniciarSimulacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_iniciarSimulacionMouseClicked
         // TODO add your handling code here:
         jt_registro.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Parada", "Tiempo", "Estudiantes"
-            }
+                new Object[][]{},
+                new String[]{
+                    "Parada", "Tiempo", "Estudiantes"
+                }
         ));
         if (jl_listaBusesSimu.getSelectedIndex() >= 0) {
             AutoBus busSeleccionado = listaBuses.get(jl_listaBusesSimu.getSelectedIndex());
-            Parada estacionActual = null;
-            ArrayList<Parada> paradasRealizar = new ArrayList();
-            for (Estudiante temp : busSeleccionado.getPasajeros()) {
-                paradasRealizar.add(temp.getParada());
-            }
-            double distanciaMenor = 1000000;
-            for (int i = 0; i < paradasRealizar.size(); i++) {
-                if (paradasRealizar.get(i).getDistancia() < distanciaMenor) {
-                    distanciaMenor = paradasRealizar.get(i).getDistancia();
-                    estacionActual = paradasRealizar.get(i);
+            if (busSeleccionado.getPasajeros().size() > 0) {
+                Parada estacionActual = null;
+                ArrayList<Parada> paradasRealizar = new ArrayList();
+                for (Estudiante temp : busSeleccionado.getPasajeros()) {
+                    paradasRealizar.add(temp.getParada());
                 }
+                double distanciaMenor = 1000000;
+                for (int i = 0; i < paradasRealizar.size(); i++) {
+                    if (paradasRealizar.get(i).getDistancia() < distanciaMenor) {
+                        distanciaMenor = paradasRealizar.get(i).getDistancia();
+                        estacionActual = paradasRealizar.get(i);
+                    }
+                }
+                int tiempo = (int) Math.ceil((estacionActual.getDistancia() / busSeleccionado.getVelocidad()) * 60);
+                AdministrarBus ab = new AdministrarBus(estacionActual.getNombre(), tiempo, jpb_simulacion, jl_estacion, estacionActual, jt_registro, paradasRealizar, busSeleccionado);
+                ab.start();
+            } else {
+                JOptionPane.showMessageDialog(this, "El bus debe tener pasajeros");
             }
-            int tiempo = (int) Math.ceil((estacionActual.getDistancia() / busSeleccionado.getVelocidad()) * 60);
-            AdministrarBus ab = new AdministrarBus(estacionActual.getNombre(), tiempo, jpb_simulacion, jl_estacion,estacionActual, jt_registro, paradasRealizar,busSeleccionado);
-            ab.start();
-            
-            
-            
         } else {
             JOptionPane.showMessageDialog(this, "Debe seleccionar un bus de la Lista");
         }
