@@ -24,11 +24,11 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         AutoBus nuevoBus = new AutoBus(110, 110);
         listaBuses.add(nuevoBus);
-        Parada parada1 = new Parada("Las Uvas", 7, 120);
+        Parada parada1 = new Parada("Las Uvas", 8, 80);
         listaParadas.add(parada1);
-        Parada parada2 = new Parada("Tiloarque", 5, 80);
+        Parada parada2 = new Parada("Tiloarque", 20, 80);
         listaParadas.add(parada2);
-        Parada parada3 = new Parada("Tatumbla", 10, 240);
+        Parada parada3 = new Parada("Tatumbla", 5, 80);
         listaParadas.add(parada3);
         Estudiante estudiante1 = new Estudiante("Ana", parada1);
         listaEstudiantes.add(estudiante1);
@@ -351,6 +351,7 @@ public class Principal extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 204, 255));
 
         jb_crearParada.setText("Crear Parada");
         jb_crearParada.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -546,17 +547,22 @@ public class Principal extends javax.swing.JFrame {
 
     private void jb_crearEstudianteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_crearEstudianteMouseClicked
         // TODO add your handling code here:
-        jd_crearEstudiante.pack();
-        jd_crearEstudiante.setModal(true);
-        jd_crearEstudiante.setLocationRelativeTo(this);
-        DefaultComboBoxModel modelo = new DefaultComboBoxModel(listaParadas.toArray());
-        cb_parada.setModel(modelo);
+        if (listaParadas.size() > 0) {
+            jd_crearEstudiante.pack();
+            jd_crearEstudiante.setModal(true);
+            jd_crearEstudiante.setLocationRelativeTo(this);
+            DefaultComboBoxModel modelo = new DefaultComboBoxModel(listaParadas.toArray());
+            cb_parada.setModel(modelo);
+            jd_crearEstudiante.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe crear una parada primero");
+        }
 
-        jd_crearEstudiante.setVisible(true);
     }//GEN-LAST:event_jb_crearEstudianteMouseClicked
 
     private void jb_agregarAbusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_agregarAbusMouseClicked
         // TODO add your handling code here:
+
         if (lista_estudiante.getSelectedIndex() >= 0) {
             AutoBus busSeleccionado = (AutoBus) cb_buses.getSelectedItem();
             Estudiante estudSeleccionado = listaEstudiantes.get(lista_estudiante.getSelectedIndex());
@@ -569,19 +575,24 @@ public class Principal extends javax.swing.JFrame {
 
     private void jb_agregarBusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_agregarBusMouseClicked
         // TODO add your handling code here:
-        jd_agregaraAutoBus.pack();
-        jd_agregaraAutoBus.setModal(true);
-        jd_agregaraAutoBus.setLocationRelativeTo(this);
-        DefaultComboBoxModel modelo = new DefaultComboBoxModel(listaBuses.toArray());
-        cb_buses.setModel(modelo);
+        if (listaBuses.size() > 0 && listaEstudiantes.size() > 0) {
+            jd_agregaraAutoBus.pack();
+            jd_agregaraAutoBus.setModal(true);
+            jd_agregaraAutoBus.setLocationRelativeTo(this);
+            DefaultComboBoxModel modelo = new DefaultComboBoxModel(listaBuses.toArray());
+            cb_buses.setModel(modelo);
 
-        DefaultListModel modeloLista = new DefaultListModel();
-        for (Estudiante temp : listaEstudiantes) {
-            modeloLista.addElement(temp);
+            DefaultListModel modeloLista = new DefaultListModel();
+            for (Estudiante temp : listaEstudiantes) {
+                modeloLista.addElement(temp);
+            }
+            lista_estudiante.setModel(modeloLista);
+
+            jd_agregaraAutoBus.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe crear tanto buses como estudiantes");
         }
-        lista_estudiante.setModel(modeloLista);
 
-        jd_agregaraAutoBus.setVisible(true);
     }//GEN-LAST:event_jb_agregarBusMouseClicked
 
     private void jb_actBusesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_actBusesMouseClicked
@@ -619,23 +630,30 @@ public class Principal extends javax.swing.JFrame {
                 }
                 paradasRealizar2.add(estacionActual);
                 paradasRealizar.remove(estacionActual);
-                /*while(paradasRealizar.size() > 0){
+                Parada estacionTemp = estacionActual;
+                Parada estacionTemp2 = null;
+                double nuevaDistanciamenor;
+                while (paradasRealizar.size() > 0) {
+                    nuevaDistanciamenor = 1000000;
                     for (int i = 0; i < paradasRealizar.size(); i++) {
-                        double coorX1 = parada.getCoorX();
-                        double coorY1 = parada.getCoorY();
+                        double coorX1 = estacionTemp.getCoorX();
+                        double coorY1 = estacionTemp.getCoorY();
                         double coorX2 = paradasRealizar.get(i).getCoorX();
                         double coorY2 = paradasRealizar.get(i).getCoorY();
                         double distanciaComparar = Math.pow(coorX2 - coorX1, 2) + Math.pow(coorY2 - coorY1, 2);
                         distanciaComparar = Math.sqrt(distanciaComparar);
                         if (distanciaComparar < nuevaDistanciamenor) {
                             nuevaDistanciamenor = distanciaComparar;
-                            temp = paradasRealizar.get(i);
+                            estacionTemp2 = paradasRealizar.get(i);
                         }
-                        parada = temp;
                     }
-                }*/
+                    paradasRealizar2.add(estacionTemp2);
+                    paradasRealizar.remove(estacionTemp2);
+                    estacionTemp = estacionTemp2;
+                }
+                System.out.println("ordenado=" + paradasRealizar2);
                 int tiempo = (int) Math.ceil((estacionActual.getDistancia() / busSeleccionado.getVelocidad()) * 60);
-                AdministrarBus ab = new AdministrarBus(estacionActual.getNombre(), tiempo, jpb_simulacion, jl_estacion, estacionActual, jt_registro, paradasRealizar, busSeleccionado);
+                AdministrarBus ab = new AdministrarBus(estacionActual.getNombre(), tiempo, jpb_simulacion, jl_estacion, estacionActual, jt_registro, paradasRealizar2, busSeleccionado);
                 ab.start();
             } else {
                 JOptionPane.showMessageDialog(this, "El bus debe tener pasajeros");

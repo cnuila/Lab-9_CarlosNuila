@@ -71,28 +71,13 @@ public class AdministrarBus extends Thread {
                 modeloTabla.addRow(row);
                 tabla.setModel(modeloTabla);
                 paradasRealizar.remove(parada);
-                Parada temp = parada;
                 if (busSeleccionado.getPasajeros().size() > 0) {
-                    double nuevaDistanciamenor = 1000000;
-                    for (int i = 0; i < paradasRealizar.size(); i++) {
-                        double coorX1 = parada.getCoorX();
-                        double coorY1 = parada.getCoorY();
-                        double coorX2 = paradasRealizar.get(i).getCoorX();
-                        double coorY2 = paradasRealizar.get(i).getCoorY();
-                        double distanciaComparar = Math.pow(coorX2 - coorX1, 2) + Math.pow(coorY2 - coorY1, 2);
-                        distanciaComparar = Math.sqrt(distanciaComparar);
-                        if (distanciaComparar < nuevaDistanciamenor) {
-                            nuevaDistanciamenor = distanciaComparar;
-                            temp = paradasRealizar.get(i);
-                        }
-                        parada = temp;
-                    }
-                    
+                    parada = paradasRealizar.get(0);
                     int tiempoNuevo = (int) Math.ceil((parada.getDistancia() / busSeleccionado.getVelocidad()) * 60);
 
                     AdministrarBus ab2 = new AdministrarBus(parada.getNombre(), tiempoNuevo, progBar, label, parada, tabla, paradasRealizar, busSeleccionado);
                     ab2.start();
-                    
+
                 }
             }
             try {
