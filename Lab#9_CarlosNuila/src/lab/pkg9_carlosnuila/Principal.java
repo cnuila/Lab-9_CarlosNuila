@@ -562,7 +562,6 @@ public class Principal extends javax.swing.JFrame {
 
     private void jb_agregarAbusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_agregarAbusMouseClicked
         // TODO add your handling code here:
-
         if (lista_estudiante.getSelectedIndex() >= 0) {
             AutoBus busSeleccionado = (AutoBus) cb_buses.getSelectedItem();
             Estudiante estudSeleccionado = listaEstudiantes.get(lista_estudiante.getSelectedIndex());
@@ -651,7 +650,6 @@ public class Principal extends javax.swing.JFrame {
                     paradasRealizar.remove(estacionTemp2);
                     estacionTemp = estacionTemp2;
                 }
-                System.out.println("ordenado=" + paradasRealizar2);
                 int tiempo = (int) Math.ceil((estacionActual.getDistancia() / busSeleccionado.getVelocidad()) * 60);
                 AdministrarBus ab = new AdministrarBus(estacionActual.getNombre(), tiempo, jpb_simulacion, jl_estacion, estacionActual, jt_registro, paradasRealizar2, busSeleccionado);
                 ab.start();

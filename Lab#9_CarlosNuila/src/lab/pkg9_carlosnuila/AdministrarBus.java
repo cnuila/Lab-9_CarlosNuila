@@ -50,7 +50,6 @@ public class AdministrarBus extends Thread {
     @Override
     public void run() {
         while (vive) {
-            System.out.println(paradasRealizar);
             label.setText(nombreEstación);
             progBar.setMaximum(tiempo);
             progBar.setValue(progBar.getValue() + 1);
